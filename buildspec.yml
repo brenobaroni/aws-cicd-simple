@@ -3,7 +3,7 @@ env:
   variables:
     APP_NAME: "angular-cicd-pipeline-demo"
     BRANCH: "master"
-    ENVIRONMENT: "prod"
+    ENVIRONMENT: "development"
 phases:
   install:
     runtime-versions:

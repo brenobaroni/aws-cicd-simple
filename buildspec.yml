@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  variables:
+    CACHE_CONTROL: "86400"
+    S3_BUCKET: "{{s3_bucket_url}}"
+    BUILD_FOLDER: "dist"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing dependencies..."
+      - npm cache clean --force
+      - npm install -g @angular/cli@latest
+      - npm install
+  build:
+    commands:
+      - echo Build started
+      - ng build --prod
+      # - aws s3 cp $BUILD_FOLDER $S3_BUCKET --recursive --cache-control max-age=$CACHE_CONTROL
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: './dist*'
+  discard-paths: yes
